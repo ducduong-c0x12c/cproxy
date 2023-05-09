@@ -21,11 +21,12 @@ func newHandler(filter Filter, clientConnector clientConnector, serverConnector 
 func (this *defaultHandler) ServeHTTP(response http.ResponseWriter, request *http.Request) {
 	this.meter.Measure(MeasurementHTTPRequest)
 
-	if request.Method != "CONNECT" {
-		this.meter.Measure(MeasurementBadMethod)
-		writeResponseStatus(response, http.StatusMethodNotAllowed)
+	// if request.Method != "CONNECT" {
+	// 	this.meter.Measure(MeasurementBadMethod)
+	// 	writeResponseStatus(response, http.StatusMethodNotAllowed)
 
-	} else if !this.filter.IsAuthorized(response, request) {
+	// } else if !this.filter.IsAuthorized(response, request) {
+	if !this.filter.IsAuthorized(response, request) {
 		this.meter.Measure(MeasurementUnauthorizedRequest)
 		writeResponseStatus(response, http.StatusUnauthorized)
 
