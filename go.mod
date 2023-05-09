@@ -1,4 +1,4 @@
-module github.com/smartystreets/cproxy/v2
+module github.com/ducduong-c0x12c/cproxy
 
 go 1.17
 
